@@ -225,9 +225,9 @@ for_window [class="^.*"] border pixel 2
 hide_edge_borders smart
 
 # Gaps size
-# 0 - 3  
-gaps inner 3
-gaps outer 3 
+# 0 - 3 
+gaps inner 10
+gaps outer 5
 
 # smart gaps
 smart_gaps on
