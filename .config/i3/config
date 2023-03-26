@@ -50,12 +50,13 @@ exec --no-startup-id dex-autostart --autostart --environment i3
 # Switch between keyboard layouts
 # exec_always --no-startup-id "setxkbmap -layout us,latam -option 'grp:ctrl_alt_toggle'"
 
+
 # Lock session
-bindsym $mod+Shift+x exec --no-startup-id i3lock
+bindsym $mod+shift+x exec "${HOME}/github/kiecan/dotfiles/scripts/lock.sh ${HOME}/Pictures/Icons/lock.png"
 
 # Take screenshots with flameshot
-bindsym Print exec --no-startup-id flameshot full
-bindsym $mod+Print exec --no-startup-id flameshot gui
+bindsym F6 exec --no-startup-id flameshot full
+bindsym $mod+F6 exec --no-startup-id flameshot gui
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
