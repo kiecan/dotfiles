@@ -67,7 +67,11 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 
 # Use brightnessctl to adjust screen brightness
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl -s set +5%
-bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl -s set 5%-
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl -s set 5%
+
+# Adjust keyboard brightness
+bindsym XF86KbdBrightnessUp exec --no-startup-id asusctl -n
+bindsym XF86KbdBrightnessDown exec --no-startup-id asusctl -m
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
