@@ -271,7 +271,6 @@ mode "resize" {
 exec --no-startup-id pamac-tray
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Theme colors
 client.focused #e39866 #1e1e20 #e39866 #e39866 #e39866
