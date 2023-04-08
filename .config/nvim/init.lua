@@ -1,2 +1,1 @@
 require("kiecan")
-print("hello")
