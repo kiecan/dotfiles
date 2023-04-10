@@ -1,5 +1,4 @@
 local opt = vim.opt -- Shortcut for config lines
-
 -- line numbers
 opt.relativenumber = true
 opt.number = true

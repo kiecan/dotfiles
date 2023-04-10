@@ -77,9 +77,9 @@ require('lazy').setup({
   {
     'rose-pine/neovim',
     priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'rose-pine'
-    end,
+--    config = function()
+--      vim.cmd.colorscheme 'rose-pine'
+--    end,
   },
 
 
@@ -440,6 +440,7 @@ cmp.setup {
 require("kiecan.core.options")
 require("kiecan.core.keymaps")
 require("kiecan.core.colorscheme")
+-- require("kiecan.plugins.nvim-tree")
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
