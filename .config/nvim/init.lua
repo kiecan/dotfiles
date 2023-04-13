@@ -78,8 +78,11 @@ require('lazy').setup({
     'rose-pine/neovim',
     priority = 1000,
   },
-
-
+  -- Tabnine AI Autocompletion
+  { 
+    'codota/tabnine-nvim', 
+    build = "./dl_binaries.sh" 
+  },
   { -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
@@ -393,6 +396,16 @@ local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 
 luasnip.config.setup {}
+
+-- Setup Tabnine 
+require('tabnine').setup({
+  disable_auto_comment=true,
+  accept_keymap="<Tab>",
+  dismiss_keymap = "<C-]>",
+  debounce_ms = 800,
+  suggestion_color = {gui = "#808080", cterm = 244},
+  exclude_filetypes = {"TelescopePrompt"}
+})
 
 cmp.setup {
   snippet = {
