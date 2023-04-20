@@ -29,6 +29,7 @@ opt.mouse = "a"
 
 -- Numbers
 opt.number = true
+opt.relativenumber = true
 opt.numberwidth = 2
 opt.ruler = false
 
@@ -42,7 +43,7 @@ opt.termguicolors = true
 opt.timeoutlen = 400
 opt.undofile = true
 
-opt.autochdir = true
+-- opt.autochdir = true
 
 -- interval for writing swap file to disk, also used by gitsigns
 opt.updatetime = 250
