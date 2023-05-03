@@ -282,8 +282,8 @@ require("lazy").setup(default_plugins, config.lazy_nvim)
 
 require('tabnine').setup({
   disable_auto_comment=true,
-  accept_keymap="<Tab>",
-  dismiss_keymap = "<C-]>",
+  accept_keymap="<Right>",
+  dismiss_keymap = "<C-Right>",
   debounce_ms = 800,
   suggestion_color = {gui = "#808080", cterm = 244},
   exclude_filetypes = {"TelescopePrompt"}
