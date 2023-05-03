@@ -1,0 +1,175 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# If you come from bash you might have to change your $PATH.
+export PATH=$HOME/bin:$HOME/homebrew/bin:/usr/local/bin:$HOME/Library/Python/3.8/bin:$PATH
+
+export PATH="$PATH":~/.local/bin
+
+# DB PATHS
+export PATH=$PATH:/Applications/MySQLWorkbench.app/Contents/MacOS
+
+
+# GO PATH
+export GOPATH=$HOME/go
+
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+
+
+plugins=(
+aws
+git
+zsh-kubectl-prompt
+zsh-autosuggestions
+web-search
+zsh-syntax-highlighting
+)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+
+alias vim="nvim"
+
+# AWS
+alias aws="PAGER=cat aws"
+
+# Git shortcuts
+alias gs='git status'
+alias gpo='git pull'
+alias ga='git add '
+alias gb='git branch '
+alias gc='cz commit'
+alias gd='git diff'
+alias gco='git switch'
+alias gsw='git checkout $(git branch -a | fzf | xargs)'
+alias gcb='git checkout -b'
+alias gpoh='git push -u origin HEAD'
+alias ghd='cd $(git rev-parse --show-toplevel)'
+alias git_diff_master='git diff master...$(git rev-parse --abbrev-ref HEAD)'
+alias git_update_all='find . -type d -depth 1 -exec echo git --git-dir={}/.git --work-tree=$PWD/{} pull \;'
+alias git_clean_main='git branch | grep -v \* | grep -v main | xargs git branch -d'
+alias git_clean_master='git branch | grep -v \* | grep -v master | xargs git branch -D'
+alias gprunesquashmerged='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse "$branch^{tree}") -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
+alias gsquashbranch='git reset $(git merge-base master $(git branch --show-current))'
+
+
+alias tf_provider='terraform providers lock -platform=darwin_amd64 -platform=linux_amd64 -platform=darwin_arm64 -platform=linux_arm64'
+alias tg_provider='terragrunt providers lock -platform=darwin_amd64 -platform=linux_amd64 -platform=darwin_arm64 -platform=linux_arm64'
+
+# SED Fix for Mac
+alias sed='gsed'
+
+
+alias ls='exa --long --header --git'
+
+alias compare_json='~/github/kiecan/tooling/json-compare/compare_json.sh'
+
+
+alias tshared='cd ~/github/Typeform/terraform-shared/'
+alias tmodules='cd ~/github/Typeform/terraform-modules/'
+alias tjenkins='cd ~/github/Typeform/jenkins-shared/'
+alias tmanifests='cd ~/github/Typeform/k8s-manifests/'
+
+get_acc_id(){
+  grep -i -A 3 " $1]" ~/.aws/config  | grep 'role_arn' | awk -F':' '{print $5}'
+}
+
+# Python
+mkvenv() {
+  if [ -n "$1" ]; then
+    python3 -m venv $1 && source $1/bin/activate
+  else
+    python3 -m venv venv && source venv/bin/activate
+  fi
+}
+
+# Kubernetes Shell Autocomplete
+source <(kubectl completion zsh)
+
+# AWS Config
+export AWS_PROFILE=identity
+export AWS_DEFAULT_PROFILE=identity
+export AWS_REGION=us-east-1
+
+# 1Password CLI
+1pass_login() {
+    eval $(op signin typeform)
+}
+
+terraform_clean() {
+  find . -name .terragrunt-cache | xargs rm -rf;
+  find . -name .terraform.lock.hcl | xargs rm -rf; 
+}
+
+# K8s Debug pod(s)
+alias debugger-pod="kubectl run -i --tty --rm debugger --image=ghcr.io/kiecan/debugger:latest --restart=Never -- bash"
+alias debugger-apply="kubectl apply -f ~/github/kiecan/tooling/debug-pod/debugger-pod.yaml"
+alias debugger-cli="kubectl exec --stdin --tty debugger-pod -- /bin/bash"
+
+alias k="kubectl"
+alias ktx="kubectx"
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/kieran.canavan/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+# KREW
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+alias get_active_prod_cluster="aws --profile=prod ssm get-parameters --names=/tfprod/active_eks_cluster --query \"Parameters[*].{Name:Name,Value:Value}\""
+alias get_active_dev_cluster="aws --profile=dev ssm get-parameters --names=/dev/config/deploy/active_eks_cluster --query \"Parameters[*].{Name:Name,Value:Value}\""
+
+## TODOIST
+to_add() {
+  todoist add --project-name 'Typeform' $1
+}
+
+## Travelgrunt
+alias tg='_tg(){ travelgrunt -out-file ~/.tg-path ${@} && cd "$(cat ~/.tg-path)" }; _tg'
+alias tt='_tt(){ travelgrunt -top -out-file ~/.tg-path && cd "$(cat ~/.tg-path)" }; _tt'
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
