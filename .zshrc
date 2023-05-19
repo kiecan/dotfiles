@@ -34,7 +34,6 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 
 plugins=(
-aws
 git
 zsh-kubectl-prompt
 zsh-autosuggestions
@@ -91,26 +90,9 @@ alias gprunesquashmerged='git checkout -q master && git for-each-ref refs/heads/
 alias gsquashbranch='git reset $(git merge-base master $(git branch --show-current))'
 
 
-alias tf_provider='terraform providers lock -platform=darwin_amd64 -platform=linux_amd64 -platform=darwin_arm64 -platform=linux_arm64'
-alias tg_provider='terragrunt providers lock -platform=darwin_amd64 -platform=linux_amd64 -platform=darwin_arm64 -platform=linux_arm64'
-
-# SED Fix for Mac
-alias sed='gsed'
-
-
 alias ls='exa --long --header --git'
 
 alias compare_json='~/github/kiecan/tooling/json-compare/compare_json.sh'
-
-
-alias tshared='cd ~/github/Typeform/terraform-shared/'
-alias tmodules='cd ~/github/Typeform/terraform-modules/'
-alias tjenkins='cd ~/github/Typeform/jenkins-shared/'
-alias tmanifests='cd ~/github/Typeform/k8s-manifests/'
-
-get_acc_id(){
-  grep -i -A 3 " $1]" ~/.aws/config  | grep 'role_arn' | awk -F':' '{print $5}'
-}
 
 # Python
 mkvenv() {
@@ -121,31 +103,6 @@ mkvenv() {
   fi
 }
 
-# Kubernetes Shell Autocomplete
-source <(kubectl completion zsh)
-
-# AWS Config
-export AWS_PROFILE=identity
-export AWS_DEFAULT_PROFILE=identity
-export AWS_REGION=us-east-1
-
-# 1Password CLI
-1pass_login() {
-    eval $(op signin typeform)
-}
-
-terraform_clean() {
-  find . -name .terragrunt-cache | xargs rm -rf;
-  find . -name .terraform.lock.hcl | xargs rm -rf; 
-}
-
-# K8s Debug pod(s)
-alias debugger-pod="kubectl run -i --tty --rm debugger --image=ghcr.io/kiecan/debugger:latest --restart=Never -- bash"
-alias debugger-apply="kubectl apply -f ~/github/kiecan/tooling/debug-pod/debugger-pod.yaml"
-alias debugger-cli="kubectl exec --stdin --tty debugger-pod -- /bin/bash"
-
-alias k="kubectl"
-alias ktx="kubectx"
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
@@ -156,20 +113,6 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="/Users/kieran.canavan/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 
-# KREW
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-
-alias get_active_prod_cluster="aws --profile=prod ssm get-parameters --names=/tfprod/active_eks_cluster --query \"Parameters[*].{Name:Name,Value:Value}\""
-alias get_active_dev_cluster="aws --profile=dev ssm get-parameters --names=/dev/config/deploy/active_eks_cluster --query \"Parameters[*].{Name:Name,Value:Value}\""
-
-## TODOIST
-to_add() {
-  todoist add --project-name 'Typeform' $1
-}
-
-## Travelgrunt
-alias tg='_tg(){ travelgrunt -out-file ~/.tg-path ${@} && cd "$(cat ~/.tg-path)" }; _tg'
-alias tt='_tt(){ travelgrunt -top -out-file ~/.tg-path && cd "$(cat ~/.tg-path)" }; _tt'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
