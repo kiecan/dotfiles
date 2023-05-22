@@ -43,6 +43,7 @@ opt.termguicolors = true
 opt.timeoutlen = 400
 opt.undofile = true
 
+
 -- interval for writing swap file to disk, also used by gitsigns
 opt.updatetime = 250
 
@@ -56,6 +57,18 @@ g.mapleader = " "
 for _, provider in ipairs { "node", "perl", "python3", "ruby" } do
   vim.g["loaded_" .. provider .. "_provider"] = 0
 end
+
+-- terraform commands
+vim.cmd([[silent! autocmd! filetypedetect BufRead,BufNewFile *.tf]])
+vim.cmd([[autocmd BufRead,BufNewFile *.hcl set filetype=hcl]])
+vim.cmd([[autocmd BufRead,BufNewFile .terraformrc,terraform.rc set filetype=hcl]])
+vim.cmd([[autocmd BufRead,BufNewFile *.tf,*.tfvars set filetype=terraform]])
+vim.cmd([[autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup set filetype=json]])
+
+vim.cmd([[let g:terraform_fmt_on_save=1]])
+vim.cmd([[let g:terraform_align=1]])
+
+
 
 -- add binaries installed by mason.nvim to path
 local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
@@ -109,3 +122,6 @@ local new_cmd = vim.api.nvim_create_user_command
 new_cmd("NvChadUpdate", function()
   require "nvchad.update"()
 end, {})
+
+-- require'lspconfig'.terraformls.setup{}
+-- require'lspconfig'.tflint.setup{}

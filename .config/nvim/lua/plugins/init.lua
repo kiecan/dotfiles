@@ -254,6 +254,10 @@ local default_plugins = {
     'codota/tabnine-nvim',
     build = "./dl_binaries.sh"
   },
+  -- vim-terraform
+  {
+    'hashivim/vim-terraform'
+  },
 
   -- Only load whichkey after all the gui
   {
