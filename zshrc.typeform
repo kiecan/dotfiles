@@ -71,6 +71,7 @@ endtime(){
 }
 
 alias vim="nvim"
+alias cat="ccat"
 
 # AWS
 alias aws="PAGER=cat aws"

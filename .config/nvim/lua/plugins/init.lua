@@ -249,11 +249,6 @@ local default_plugins = {
       end
     end,
   },
-  -- tabnine install
-  {
-    'codota/tabnine-nvim',
-    build = "./dl_binaries.sh"
-  },
   -- vim-terraform
   {
     'hashivim/vim-terraform'
@@ -284,11 +279,3 @@ end
 
 require("lazy").setup(default_plugins, config.lazy_nvim)
 
-require('tabnine').setup({
-  disable_auto_comment=true,
-  accept_keymap="<Right>",
-  dismiss_keymap = "<C-Right>",
-  debounce_ms = 800,
-  suggestion_color = {gui = "#808080", cterm = 244},
-  exclude_filetypes = {"TelescopePrompt"}
-})
