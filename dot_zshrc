@@ -1,4 +1,9 @@
-## History fixes
+################################
+##                            ##
+##          History           ##
+##                            ##
+################################
+#
 HISTFILE=~/.zsh_history # location of the history file
 export HISTFILESIZE=10000000 # history limit of the file on disk
 export HISTFILESIZE=10000000 # history limit of the file on disk
@@ -10,15 +15,25 @@ setopt EXTENDED_HISTORY # records the time when each command was executed along 
 setopt APPENDHISTORY # ensures that each command entered in the current session is appended to the history file immediately after execution
 export HISTTIMEFORMAT="%d/%m/%Y %H:%M] "
 
-## Plugins
+################################
+##                            ##
+##          Plugins           ##
+##                            ##
+################################
+
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh
 
-## Aliases
+################################
+##                            ##
+##          Aliases           ##
+##                            ##
+################################
+#
 alias vim="nvim"
 alias cat="bat"
-### Git
+
 alias gs='git status'
 alias gpo='git pull'
 alias ga='git add '
@@ -37,6 +52,11 @@ alias git_clean_master='git branch | grep -v \* | grep -v master | xargs git bra
 alias gprunesquashmerged='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse "$branch^{tree}") -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
 alias gsquashbranch='git reset $(git merge-base master $(git branch --show-current))'
 
+################################
+##                            ##
+##          Starship          ##
+##                            ##
+################################
 
 eval "$(starship init zsh)"
 
