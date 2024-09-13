@@ -1,0 +1,22 @@
+{
+  "prefs": {
+    "TelemetryEnabled": "true",
+    "AutosuggestionAcceptedCount": "2",
+    "ExperimentId": "81f02e3c-2fdd-4a4e-b3f9-e19992abf57e",
+    "WelcomeTipsFeaturesUsed": "[{\"Hint\":\"CreateBlock\"},{\"Action\":\"ThemePicker\"},{\"Action\":\"CommandSearch\"},{\"Action\":\"AiCommandSearch\"}]",
+    "AIAssistantRequestLimitInfo": "{\"limit\":100,\"num_requests_used_since_refresh\":0,\"next_refresh_time\":\"2024-10-13T07:26:08.487160Z\",\"is_unlimited\":false}",
+    "EmacsBindingsBannerState": "\"Dismissed\"",
+    "AIRequestLimitInfo": "{\"limit\":100,\"num_requests_used_since_refresh\":3,\"next_refresh_time\":\"2024-10-13T07:26:08.487160Z\",\"is_unlimited\":false}",
+    "NotebookFontSize": "14.0",
+    "Theme": "\"CyberWave\"",
+    "CrashReportingEnabled": "true",
+    "SameLinePromptBlockState": "\"DoNotShow\"",
+    "WorkflowsBoxOpen": "true",
+    "FontSize": "13.0",
+    "SystemTheme": "false",
+    "ReceivedReferralTheme": "\"Inactive\"",
+    "HasAutoOpenedWelcomeFolder": "true",
+    "FontName": "\"MesloLGS Nerd Font\"",
+    "AliasExpansionBannerSeen": "true"
+  }
+}
