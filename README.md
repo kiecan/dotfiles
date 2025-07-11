@@ -4,14 +4,29 @@ This repo contains all of the dotfiles that are backup up using `chezmoi`. You c
 
 ## Getting started
 
+To set up a new system run the followng:
+
+```bash
+chezmoi init git@github.com:kiecan/dotfiles.git
+
+chezmoi git pull 
+
+chezmoi apply
+```
+
+## Usage
+
 To add a file to chezmoi, run:
 
 ```bash
 chezmoi add <path/to/file/folder>
 ```
 
-To restore files to a new machine, run: 
+Remember to update the following for autopush:
 
-```bash
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply $GITHUB_USERNAME
+FILE:  ~/.config/chezmoi/chezmoi.toml
+```toml
+[git]
+    autoCommit = true
+    autoPush = true
 ```
