@@ -1,25 +1,20 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Download folder
 DIR="$HOME/Pictures/BingWallpapers"
 mkdir -p "$DIR"
 
-# Bing JSON API (last 1 day)
+# Bing JSON API
 URL="https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US"
-
-# Get image URL
 IMG=$(curl -s "$URL" | jq -r '.images[0].url')
 IMGURL="https://www.bing.com${IMG}"
 
-# File path
-FILENAME="$DIR/$(date +%Y-%m-%d).jpg"
+FILENAME="$DIR/today.jpg"
 
-# Download if not already saved
-if [ ! -f "$FILENAME" ]; then
-  curl -s -o "$FILENAME" "$IMGURL"
-fi
+# Always refresh today's image
+curl -s -o "$FILENAME" "$IMGURL"
 
-# Set wallpaper with swww
-swww img "$FILENAME" --transition-type any
+# Tell hyprpaper to swap wallpaper
+hyprctl hyprpaper preload "$FILENAME"
+hyprctl hyprpaper wallpaper ",$FILENAME"
 
