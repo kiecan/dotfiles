@@ -18,3 +18,5 @@ curl -s -o "$FILENAME" "$IMGURL"
 hyprctl hyprpaper preload "$FILENAME"
 hyprctl hyprpaper wallpaper ",$FILENAME"
 
+wal -i "$FILENAME" -n         # -n = don’t set wallpaper (we’re doing that ourselves)
+hyprctl reload
