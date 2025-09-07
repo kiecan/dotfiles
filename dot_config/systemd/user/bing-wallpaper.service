@@ -1,0 +1,6 @@
+[Unit]
+Description=Update Bing wallpaper
+
+[Service]
+ExecStart=%h/.local/bin/bing-wallpaper.sh
+
