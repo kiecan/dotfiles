@@ -111,3 +111,12 @@ export QT_ENABLE_HIGHDPI_SCALING=1
 export GDK_SCALE=2
 export GDK_DPI_SCALE=0.5
 
+
+alias vim="nvim"
+
+
+
+if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+  tmux attach-session -t terminal || tmux new-session -s terminal
+fi
+
